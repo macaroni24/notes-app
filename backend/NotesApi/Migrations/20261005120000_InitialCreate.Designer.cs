@@ -1,0 +1,63 @@
+using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using NotesApi.Data;
+
+#nullable disable
+
+namespace NotesApi.Migrations;
+
+[DbContext(typeof(AppDbContext))]
+[Migration("20261005120000_InitialCreate")]
+partial class InitialCreate
+{
+    protected override void BuildTargetModel(ModelBuilder modelBuilder)
+    {
+#pragma warning disable 612, 618
+        modelBuilder.HasAnnotation("ProductVersion", "8.0.20");
+
+        modelBuilder.Entity("NotesApi.Models.Note", b =>
+        {
+            b.Property<int>("Id").ValueGeneratedOnAdd().HasColumnType("INTEGER");
+            b.Property<string>("Content").IsRequired().HasMaxLength(3000).HasColumnType("TEXT");
+            b.Property<DateTime>("CreatedAt").HasColumnType("TEXT");
+            b.Property<string>("Title").IsRequired().HasMaxLength(100).HasColumnType("TEXT");
+            b.Property<DateTime>("UpdatedAt").HasColumnType("TEXT");
+            b.Property<int>("UserId").HasColumnType("INTEGER");
+            b.HasKey("Id");
+            b.HasIndex("UserId");
+            b.ToTable("Notes");
+        });
+
+        modelBuilder.Entity("NotesApi.Models.User", b =>
+        {
+            b.Property<int>("Id").ValueGeneratedOnAdd().HasColumnType("INTEGER");
+            b.Property<DateTime>("CreatedAt").HasColumnType("TEXT");
+            b.Property<string>("Email").IsRequired().HasMaxLength(254).HasColumnType("TEXT");
+            b.Property<string>("Name").IsRequired().HasMaxLength(60).HasColumnType("TEXT");
+            b.Property<string>("NormalizedEmail").IsRequired().HasMaxLength(254).HasColumnType("TEXT");
+            b.Property<string>("PasswordHash").IsRequired().HasColumnType("TEXT");
+            b.HasKey("Id");
+            b.HasIndex("NormalizedEmail").IsUnique();
+            b.ToTable("Users");
+        });
+
+        modelBuilder.Entity("NotesApi.Models.Note", b =>
+        {
+            b.HasOne("NotesApi.Models.User", "User")
+                .WithMany("Notes")
+                .HasForeignKey("UserId")
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired();
+            b.Navigation("User");
+        });
+
+        modelBuilder.Entity("NotesApi.Models.User", b =>
+        {
+            b.Navigation("Notes");
+        });
+#pragma warning restore 612, 618
+    }
+}
