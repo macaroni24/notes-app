@@ -1,21 +1,45 @@
 const styles = `
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap");
-
-* { box-sizing: border-box; }
-:root {
-  font-family: "DM Sans", sans-serif;
-  color: #f3f0ea;
-  background: #11110f;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+* {
+  box-sizing: border-box;
 }
-html, body, #root { min-width: 320px; min-height: 100%; margin: 0; background: #11110f; }
-body { min-height: 100vh; color: #f3f0ea; }
-button, input, textarea { font: inherit; }
-button { cursor: pointer; }
-button, input, textarea { -webkit-tap-highlight-color: transparent; }
-button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid #c5642f; outline-offset: 2px; }
-svg { display: block; }
+
+html,
+body,
+#root {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: #1b1b1b;
+  color: #f5f5f5;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+input,
+textarea,
+button {
+  outline: none;
+}
+
+input:focus,
+textarea:focus,
+button:focus-visible {
+  outline: 2px solid #d56b2d;
+  outline-offset: 2px;
+}
 `;
 
 export default function GlobalStyles() {
