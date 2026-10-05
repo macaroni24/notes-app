@@ -50,15 +50,16 @@ builder.Services.AddAntiforgery(options =>
     options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
 });
 
-var allowedOrigins =
-    builder.Configuration.GetSection("AllowedOrigins").Get<string[]>() ?? [];
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("Frontend", policy =>
     {
         policy
-            .WithOrigins(allowedOrigins)
+            .WithOrigins(
+                "http://localhost:5173",
+                "https://notes-app-j.vercel.app",
+                "https://notes-app-rho-jade.vercel.app"
+            )
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
