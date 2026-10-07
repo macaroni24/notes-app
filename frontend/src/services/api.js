@@ -1,5 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || "https://localhost:7148/api";
-
+const API_URL = "/api";
 let csrfToken = null;
 
 async function parseResponse(response) {
